@@ -87,7 +87,7 @@ export const CloseMenuButton = styled.button`
 export const Menu = styled.div<MenuProps>`
     position: fixed;
     background: #f48fb1;
-    height: 100%;
+    height: 200%;
     width: 100%;
     top: 0;
     left: 0;
