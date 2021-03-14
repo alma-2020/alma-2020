@@ -28,6 +28,22 @@ export const NavbarDiv = styled.div`
     }
 `;
 
+export const MobileMenuDiv = styled.div`
+    display: none;
+    
+    @media only screen and (max-width: 1224px) {
+        display: unset;
+    }
+`;
+
+export const DesktopMenuDiv = styled.div`
+    display: none;
+
+    @media only screen and (min-width: 1225px) {
+        display: unset;
+    }
+`;
+
 export const OpenMenuButton = styled.button`
     border: none;
     padding: 15px 20px;

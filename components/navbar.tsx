@@ -4,24 +4,17 @@ import React, {
     useState,
 } from 'react'
 import Link from 'next/link'
-import { useMediaQuery } from 'react-responsive'
 import { 
     NavbarDiv, 
     OpenMenuButton, 
     CloseMenuButton,
     Menu,
+    MobileMenuDiv,
+    DesktopMenuDiv,
     Overlay,
 } from '../styles/navbarStyles'
 
 const Navbar: FC = () => {
-    
-
-    const isTabletOrMobile = useMediaQuery({
-        maxWidth: 1224,
-    });
-
-    
-
     return (
         <NavbarDiv>
             <Link href="/">
@@ -30,9 +23,8 @@ const Navbar: FC = () => {
                 </a>
             </Link>
 
-            {(isTabletOrMobile && (
-                <MobileMenu />
-            ))}
+            <MobileMenu />
+            <DesktopMenu />
         </NavbarDiv>
     );
 };
@@ -45,15 +37,34 @@ const MobileMenu: FC = () => {
             return;
 
         if (isSidebarOpen) {
-            document.body.style.overflowY = 'hidden';
+            // block scroll while the modal is open and set a margin on the 
+            // page with the same width as the scrollbar so that the content 
+            // doesn't jump around when the scrollbar appears/disappears 
+
+            let marginRightPx = 0;
+            if (window.getComputedStyle) {
+                const bodyStyle = window.getComputedStyle(document.body);
+                if (bodyStyle) {
+                    marginRightPx = parseInt(bodyStyle.marginRight, 10);
+                }
+            }
+
+            let scrollbarWidthPx = window.innerWidth - document.body.clientWidth;
+            Object.assign(document.body.style, {
+                overflowY: 'hidden',
+                marginRight: `${marginRightPx + scrollbarWidthPx}px`,
+            });
         }
         else {
-            document.body.style.overflowY = 'unset';
+            Object.assign(document.body.style, {
+                overflowY: 'unset',
+                marginRight: `0px`,
+            });
         }
     }, [isSidebarOpen]);
 
     return (
-        <div>
+        <MobileMenuDiv>
             <OpenMenuButton
                 onClick={() => setIsSidebarOpen(true)}
             >
@@ -69,7 +80,15 @@ const MobileMenu: FC = () => {
             </Menu>
 
             <Overlay show={isSidebarOpen} />
-        </div>
+        </MobileMenuDiv>
+    );
+};
+
+const DesktopMenu: FC = () => {
+    return (
+        <DesktopMenuDiv>
+            <p>Imagine um menu legal aqui</p>
+        </DesktopMenuDiv>
     );
 };
 
