@@ -61,7 +61,8 @@ export const getStaticProps = async () => {
 const HomeDiv = styled.div`
     max-width: 36rem;
     padding: 0 1rem;
-    margin: 3rem auto 6rem;
+    //margin: 3rem auto 6rem;
+    margin: 0px auto 6rem;
     display: flex;
     align-items: center;
     justify-content: center;

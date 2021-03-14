@@ -74,7 +74,7 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                         <MenuContentItem 
                             key={i}
                             onClick={handleLinkClick}
-                            >
+                        >
                             <Link href={item.link} >
                                 {item.label}
                             </Link>
