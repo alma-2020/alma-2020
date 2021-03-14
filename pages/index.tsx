@@ -13,7 +13,6 @@ interface Props {
 
 const Home: FC<Props> = ({ allPostsData }) => {
     return (
-        <Layout home>
             <HomeDiv>
                 <Head>
                 <title>{siteTitle}</title>
@@ -46,7 +45,6 @@ const Home: FC<Props> = ({ allPostsData }) => {
                 </section>
                 </ContentWrapper>
             </HomeDiv>
-        </Layout>
     );
 };
 

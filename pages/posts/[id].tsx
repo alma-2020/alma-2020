@@ -139,7 +139,6 @@ const PostPage: FC<Props> = ({ postData }) => {
     }
 
     return (
-        <Layout>
             <PostDiv>
                 <Head>
                     <title>A COOL BLOG - {postData.title}</title>
@@ -207,7 +206,6 @@ const PostPage: FC<Props> = ({ postData }) => {
                 </Link>
                 </div>
             </PostDiv>
-        </Layout>
     );
 };
 
