@@ -8,6 +8,8 @@ interface OverlayProps {
     show: boolean;
 }
 
+const MOBILE_MENU_WIDTH = 70;
+
 export const NavbarDiv = styled.div`
     position: relative;
     width: 100%;
@@ -97,10 +99,10 @@ export const CloseMenuButton = styled.button`
     border-radius: 4px;
     background: #f48fb1;
     color: white;
-    padding-top: 10px;
+    padding-top: 15px;
     padding-bottom: 20px;
     padding-left: 20px;
-    padding-right: 10px;
+    padding-right: 25px;
     font-size: 35px;
     outline: none;
 `;
@@ -109,15 +111,21 @@ export const Menu = styled.div<MenuProps>`
     position: fixed;
     background: #f48fb1;
     height: 200%;
-    width: 100%;
+    //width: 100%;
+    width: ${MOBILE_MENU_WIDTH}%;
+    margin: 0;
     top: 0;
     left: 0;
-    transform: translateX(100%);
+    right: 0;
+    //transform: translateX(100%);
+    transform: translateX(${100 + MOBILE_MENU_WIDTH}%);
     transition: transform 0.3s ease-in-out;
     z-index: 3;
+    box-shadow: gray 0px 0px 10px 1px;
     
     ${(props) => (props.isOpen && css`
-        transform: translateX(0%);
+        //transform: translateX(0%);
+        transform: translateX(43%);
     `)}
 `;
 
@@ -140,8 +148,9 @@ export const MenuContentItem = styled.div`
     margin-bottom: 10px;
     width: 200px;
     height: 50px;
-    box-shadow: #bf5f82 0px 0px 3px 1px;
+    box-shadow: #bf5f82 0px 0px 3px 0.5px;
     border-radius: 4px;
+    max-width: 90%;
 
     a {
         border-radius: 4px;
@@ -159,7 +168,7 @@ export const Overlay = styled.div<OverlayProps>`
     background: black;
     height: 100%;
     width: 100%;
-    pointer-events: none;
+    pointer-events: none; // make use click through this element
     top: 0;
     left: 0;
     opacity: 0;
@@ -167,5 +176,6 @@ export const Overlay = styled.div<OverlayProps>`
 
     ${(props) => (props.show && css`
         opacity: 0.6;
+        pointer-events: unset;
     `)}
 `;

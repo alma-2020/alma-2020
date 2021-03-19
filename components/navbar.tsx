@@ -29,6 +29,7 @@ interface MenuProps {
 
 const menuItems: MenuItems[] = [
     { label: 'Home', link: '/' },
+    { label: 'Something', link: '/' },
     { label: 'About us', link: '/' },
 ];
 
@@ -83,7 +84,10 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                 </MenuContent>
             </Menu>
 
-            <Overlay show={isSidebarOpen} />
+            <Overlay 
+                show={isSidebarOpen}
+                onClick={() => setIsSidebarOpen(false)} 
+            />
         </MobileMenuDiv>
     );
 };
