@@ -166,7 +166,7 @@ export const MenuContentItem = styled.div`
 export const Overlay = styled.div<OverlayProps>`
     position: fixed;
     background: black;
-    height: 100%;
+    height: 200%;
     width: 100%;
     pointer-events: none; // make use click through this element
     top: 0;
