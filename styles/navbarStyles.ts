@@ -54,21 +54,41 @@ export const DesktopMenuDiv = styled.div`
 
 
 export const DesktopMenuItem = styled.div`
-    margin-left: 10px;
     user-select: none;
+    margin-left: 10px;
 
-    a {
+    div {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 20px;
         color: #f48fb1;
         background-color: unset;
         padding: 12px;
         border-radius: 3px;
-        transition: color .2s linear, background-color .2s linear;
+        text-decoration: none;
+        transition: text-decoration .2s linear, 
+                    color .2s linear, 
+                    background-color .2s linear;
+    
+        a {
+            color: #f48fb1;
+        }
     }
 
-    a:hover {
+    div:hover {
+        text-decoration: underline;
         background-color: #f48fb1;
         color: white;
+
+        a {
+            color: white;
+        }
+    }
+
+    svg {
+        margin-right: 5px;
     }
 `;
 
@@ -166,6 +186,10 @@ export const MenuContentItem = styled.div`
         background: #bf5f82;
         color: white;
         width: 100%;
+
+        a {
+            color: white;
+        }
     }
 
     svg {

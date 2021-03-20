@@ -27,7 +27,7 @@ import {
 interface MenuItems {
     label: string; 
     link: string;
-    icon?: () => JSX.Element;
+    Icon?: FC<{ size: number }>;
 }
 
 interface MenuProps {
@@ -38,17 +38,17 @@ const menuItems: MenuItems[] = [
     { 
         label: 'Home', 
         link: '/', 
-        icon: () => (<MdHome size={25} />), 
+        Icon: ({ size }) => (<MdHome size={size} />), 
     },
     { 
         label: 'Something', 
         link: '/', 
-        icon: () => (<MdList size={25} />),
+        Icon: ({ size }) => (<MdList size={size} />),
     },
     { 
         label: 'About us', 
         link: '/', 
-        icon: () => (<MdInfo size={25} />), 
+        Icon: ({ size }) => (<MdInfo size={size} />), 
     },
 ];
 
@@ -97,10 +97,10 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                         >
                             <Link href={item.link} >
                                 <div style={{ width: '100%' }}>
-                                    {(typeof item.icon !== 'undefined') && (
-                                        item.icon()
+                                    {(typeof item.Icon !== 'undefined') && (
+                                        <item.Icon size={25} />
                                     )}
-                                    {item.label}
+                                    <a href={item.link}>{item.label}</a>
                                 </div>
                             </Link>
                         </MenuContentItem>
@@ -123,7 +123,12 @@ const DesktopMenu: FC<MenuProps> = ({ items }) => {
                 <DesktopMenuItem key={i}>
                     <Link href={item.link}>
                         <div>
-                            {item.label}
+                            {/*
+                            {(typeof item.Icon !== 'undefined') && (
+                                <item.Icon size={25} />
+                            )}
+                            */}
+                            <a href={item.link}>{item.label}</a>
                         </div>
                     </Link>
                 </DesktopMenuItem>
