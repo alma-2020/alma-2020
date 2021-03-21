@@ -2,6 +2,7 @@ import React, {
     FC,
     useEffect, 
     useState,
+    useRef,
 } from 'react'
 import Link from 'next/link'
 import { 
@@ -69,10 +70,43 @@ const Navbar: FC = () => {
 
 const MobileMenu: FC<MenuProps> = ({ items }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    
-    const handleLinkClick = () => {
-        setIsSidebarOpen(false);
+    const menuRef = useRef();
+    const overlayRef = useRef();
+
+    const handleMenuScroll = (e: TouchEvent|WheelEvent) => {
+        if (isSidebarOpen) {
+            // prevent scroll
+            e.preventDefault();
+        }
     };
+    
+    const handleOverlayScroll = (e: TouchEvent|WheelEvent) => {
+        if (isSidebarOpen) {
+            // prevent scroll
+            e.preventDefault();
+        }
+    };
+    
+    useEffect(() => {
+        const menu: HTMLDivElement = menuRef.current;
+        const overlay: HTMLDivElement = overlayRef.current;
+
+        menu.addEventListener('touchmove', handleMenuScroll, { 
+            passive: false 
+        });
+
+        menu.addEventListener('wheel', handleMenuScroll, { 
+            passive: false 
+        });
+
+        overlay.addEventListener('touchmove', handleOverlayScroll, { 
+            passive: false 
+        });
+
+        overlay.addEventListener('wheel', handleOverlayScroll, { 
+            passive: false 
+        });
+    });
 
     return (
         <MobileMenuDiv>
@@ -82,7 +116,10 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                 <MdMenu size={40} />
             </OpenMenuButton>
         
-            <Menu isOpen={isSidebarOpen}>
+            <Menu 
+                isOpen={isSidebarOpen}
+                ref={menuRef}
+            >
                 <CloseMenuButton
                     onClick={() => setIsSidebarOpen(false)}
                 >
@@ -92,15 +129,16 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
                 <MenuContent>
                     {items.map((item, i) => (
                         <MenuContentItem 
-                        key={i}
-                        onClick={handleLinkClick}
+                            key={i}
+                            onClick={() => setIsSidebarOpen(false)}
                         >
                             <Link href={item.link} >
                                 <div style={{ width: '100%' }}>
                                     {(typeof item.Icon !== 'undefined') && (
                                         <item.Icon size={25} />
                                     )}
-                                    <a href={item.link}>{item.label}</a>
+
+                                    <a>{item.label}</a>
                                 </div>
                             </Link>
                         </MenuContentItem>
@@ -111,6 +149,7 @@ const MobileMenu: FC<MenuProps> = ({ items }) => {
             <Overlay 
                 show={isSidebarOpen}
                 onClick={() => setIsSidebarOpen(false)} 
+                ref={overlayRef}
             />
         </MobileMenuDiv>
     );
@@ -128,7 +167,8 @@ const DesktopMenu: FC<MenuProps> = ({ items }) => {
                                 <item.Icon size={25} />
                             )}
                             */}
-                            <a href={item.link}>{item.label}</a>
+                            
+                            <a>{item.label}</a>
                         </div>
                     </Link>
                 </DesktopMenuItem>
