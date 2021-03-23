@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
-const cardBorderRadius = '5px';
-const cardBackground = '#E91E63';
+    const cardBackground = '#E91E63';
 
 export const PostCardGridContainer = styled.div`
     display: grid;
@@ -15,15 +14,18 @@ export const PostCard = styled.div`
     background: ${cardBackground};
     width: 300px;
     border: 1px solid ${cardBackground};
-    border-radius: ${cardBorderRadius};
+    border-radius: 5px;
     box-shadow: 0px 0px 10px 0px gray;
     text-align: center;
 
     img.post-cover {
-        border-top-left-radius: ${cardBorderRadius};
-        border-top-right-radius: ${cardBorderRadius};
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        width: 100%;
+        height: 168px;
+        display: block;
     }
-
+    
     a.card-title {
         //color: #0070f3;
         color: white;
