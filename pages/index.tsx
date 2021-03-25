@@ -7,12 +7,17 @@ import Layout, {siteTitle} from "../components/layout"
 import Date from '../components/date'
 import utilStyles from './styles/utils.module.css'
 import { 
-    PostCard,
+    PostCardDiv,
     PostCardGridContainer,
 } from '../styles/homeStyles'
 
 interface Props {
     allPostsData: Array<Post>;
+}
+
+interface PostCardProps {
+    post: Post; 
+    key: string;
 }
 
 const DEFAULT_COVER = 'https://i.imgur.com/zRG5yAE.png';
@@ -31,24 +36,10 @@ const Home: FC<Props> = ({ allPostsData }) => {
                 >                    
                     <PostCardGridContainer>
                         {allPostsData.map(post => (
-                            <PostCard key={post.id}>
-                                <img 
-                                    className="post-cover"
-                                    src={DEFAULT_COVER} 
-                                    alt="cover"
-                                />
-
-                                <Link href={`/posts/${post.id}`}>
-                                    <a className="card-title">
-                                        {post.title}
-                                    </a>
-                                </Link>
-                                        
-                                <br />
-                                <small className="card-date">
-                                    <Date dateString={post.date} />
-                                </small>
-                            </PostCard>
+                            <PostCard 
+                                key={post.id} 
+                                post={post} 
+                            />
                         ))}
                     </PostCardGridContainer>
                 </section>
@@ -56,6 +47,41 @@ const Home: FC<Props> = ({ allPostsData }) => {
         </HomeDiv>
     );
 };
+
+const PostCard: FC<PostCardProps> = ({ post }) => {
+    return (
+        <PostCardDiv>
+            <div className="post-cover"
+                style={{ backgroundImage: `url("${DEFAULT_COVER}")` }}
+            >
+                
+                {/* 
+                <img 
+                    
+                    src={DEFAULT_COVER} 
+                    alt="cover"
+                />
+                */}
+            </div>
+
+            <Link href={`/posts/${post.id}`}>
+                <a className="card-title">
+                    {post.title}
+                </a>
+            </Link>
+
+            <div className="card-description">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                </p>
+            </div>
+                                        
+            <small className="card-date">
+                <Date dateString={post.date} />
+            </small>
+        </PostCardDiv>
+    );
+}
 
 export const getStaticProps = async () => {
     const allPostsData = await getSortedPostsData();
