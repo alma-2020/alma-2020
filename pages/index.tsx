@@ -51,17 +51,10 @@ const Home: FC<Props> = ({ allPostsData }) => {
 const PostCard: FC<PostCardProps> = ({ post }) => {
     return (
         <PostCardDiv>
-            <div className="post-cover"
+            <div 
+                className="post-cover"
                 style={{ backgroundImage: `url("${DEFAULT_COVER}")` }}
             >
-                
-                {/* 
-                <img 
-                    
-                    src={DEFAULT_COVER} 
-                    alt="cover"
-                />
-                */}
             </div>
 
             <Link href={`/posts/${post.id}`}>
