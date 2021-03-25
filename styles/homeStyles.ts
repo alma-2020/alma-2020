@@ -25,7 +25,7 @@ export const PostCardDiv = styled.div`
         display: block;
         height: 168px;
         width: 100%;
-        box-shadow: 0px 2px 20px 0.25px gray inset;
+        box-shadow: 0px -2px 5px -2px gray inset;
         background-position: center center;
         background-size:     cover;
         border-top-left-radius: 5px;
