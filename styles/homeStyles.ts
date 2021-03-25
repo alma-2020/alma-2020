@@ -9,6 +9,10 @@ export const PostCardGridContainer = styled.div`
     grid-column-gap: 30px;
     grid-row-gap: 30px;
     grid-template-columns: repeat( auto-fit, minmax(${cardWidth}, 1fr) );
+
+    @media only screen and (max-width: 400px) {
+        grid-template-columns: none;
+    }
 `;
 
 export const PostCardDiv = styled.div`
@@ -22,6 +26,10 @@ export const PostCardDiv = styled.div`
 
     &:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    @media only screen and (max-width: 400px) {
+        width: 99%;
     }
 
     .post-cover {

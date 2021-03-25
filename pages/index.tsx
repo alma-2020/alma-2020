@@ -103,6 +103,10 @@ const HomeDiv = styled.div`
 
 const ContentWrapper = styled.div`
     width: 90%;
+
+    @media only screen and (max-width: 400px) {
+        width: 100%;
+    }
 `;
 
 export default Home;
